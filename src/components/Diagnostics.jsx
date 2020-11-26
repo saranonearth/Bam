@@ -48,9 +48,15 @@ const Diagnostics = () => {
           );
 
           const newMessages = [...state.messages];
+          console.log(res.data);
+          let botResponse;
+          botResponse =
+            res.data.mentions.length === 0
+              ? "Could you please try saying that again? I could not make out what you were saying"
+              : "Here is what I found that could be troubling you:";
           const message = {
             sender: "bot",
-            data: "Here's what I found that could be troubling you:",
+            data: botResponse,
           };
           newMessages.push(message);
           res.data.mentions.forEach((e) => {
@@ -128,9 +134,9 @@ const Diagnostics = () => {
               </button>
             </form>
           </div>
-          <div className="mic v-center">
+          <div className="mic v-center" onClick={voiceHandler}>
             <div>
-              <i class="fas fa-microphone" onClick={voiceHandler}></i>
+              <i class="fas fa-microphone"></i>
             </div>
           </div>
         </div>
